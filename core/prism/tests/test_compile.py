@@ -1,7 +1,7 @@
 import os
 import inspect
 from unittest import TestCase
-from ..compile import PrismCompiler
+from ..compile import Compiler
 from ...base_generator import BaseGenerator
 from ..expression_builder import *
 from ..expression import *
@@ -43,7 +43,7 @@ class TestCompiler(TestCase):
         path = os.path.abspath(inspect.getsourcefile(lambda: 0))
         path = os.path.dirname(path)
 
-        compiler = PrismCompiler(self.TestGenerator(), "{}/resources/test_template.prism".format(path))
+        compiler = Compiler(self.TestGenerator(), "{}/resources/test_template.prism".format(path))
 
         input_stream = InputStream(str(compiler.compile()))
         output_stream = StringIO()

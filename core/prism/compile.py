@@ -7,7 +7,7 @@ from .expression import *
 from .expression_builder import *
 
 
-class PrismCompiler(PrismTemplateVisitor):
+class Compiler(PrismTemplateVisitor):
     def __init__(self, generator: Any, template_path: str):
         self._generator = generator
         self._template_path = template_path
