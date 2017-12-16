@@ -1,3 +1,5 @@
+import os
+import inspect
 from unittest import TestCase
 from antlr4 import ParseTreeWalker, CommonTokenStream, FileStream
 from ..parser.PrismTemplateLexer import PrismTemplateLexer
@@ -8,7 +10,9 @@ from ..parser.listeners import PrismReplacementsGatherer, PrismErrorListener
 class TestTemplateParser(TestCase):
 
     def test_create_tree(self):
-        input_stream = FileStream("resources/test_model.prism")
+        path = os.path.abspath(inspect.getsourcefile(lambda: 0))
+        path = os.path.dirname(path)
+        input_stream = FileStream("{}/resources/test_model.prism".format(path))
         lexer = PrismTemplateLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = PrismTemplateParser(stream)
@@ -22,7 +26,9 @@ class TestTemplateParser(TestCase):
         self.assertTrue(len(error_listener.msg_list) == 0)
 
     def test_replacements_parsing(self):
-        input_stream = FileStream("resources/test_template.prism")
+        path = os.path.abspath(inspect.getsourcefile(lambda: 0))
+        path = os.path.dirname(path)
+        input_stream = FileStream("{}/resources/test_template.prism".format(path))
         lexer = PrismTemplateLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = PrismTemplateParser(stream)
