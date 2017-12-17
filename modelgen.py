@@ -37,7 +37,9 @@ def main(argv):
 
 
 def load_settings(path: str):
-    return yaml.load(path)
+    with open(path, 'r') as file:
+        settings = yaml.load(file)
+    return settings
 
 
 def load_generator(path: str, settings: Any):
@@ -60,7 +62,7 @@ def load_compiler(name: str, template_path: str, generator: BaseGenerator):
     module_obj = importlib.util.module_from_spec(module_spec)
     module_spec.loader.exec_module(module_obj)
     generator_class = getattr(module_obj, 'Compiler')
-    return generator_class(template_path, generator)
+    return generator_class(generator, template_path)
 
 
 def create_output_path(template_path: str):
