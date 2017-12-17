@@ -3,7 +3,7 @@ import os
 import argparse
 import yaml
 import importlib.util
-from .core.base_generator import BaseGenerator
+from core.base_generator import BaseGenerator
 from typing import Any
 
 
@@ -44,6 +44,7 @@ def load_generator(path: str, settings: Any):
     module_name, ext = os.path.splitext(filename)
     module_spec = importlib.util.spec_from_file_location(module_name, path)
     module_obj = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(module_obj)
     generator_class = getattr(module_obj, module_name)
     return generator_class(settings)
 
@@ -54,6 +55,7 @@ def load_compiler(name: str, template_path: str, generator: BaseGenerator):
     module_name, ext = os.path.splitext(filename)
     module_spec = importlib.util.spec_from_file_location(module_name, path)
     module_obj = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(module_obj)
     generator_class = getattr(module_obj, 'Compiler')
     return generator_class(template_path, generator)
 
