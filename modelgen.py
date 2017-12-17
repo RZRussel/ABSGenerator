@@ -4,7 +4,6 @@ import inspect
 import argparse
 import yaml
 import importlib.util
-from core.base_generator import BaseGenerator
 from typing import Any
 
 
@@ -52,7 +51,7 @@ def load_generator(path: str, settings: Any):
     return generator_class(settings)
 
 
-def load_compiler(name: str, template_path: str, generator: BaseGenerator):
+def load_compiler(name: str, template_path: str, generator: Any):
     path = os.path.abspath(inspect.getsourcefile(lambda: 0))
     path = os.path.dirname(path)
     path = os.path.join(path, "core/{}/compile.py".format(name))

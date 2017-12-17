@@ -1,2 +1,0 @@
-class BaseGenerator:
-    pass

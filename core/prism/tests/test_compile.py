@@ -2,7 +2,6 @@ import os
 import inspect
 from unittest import TestCase
 from ..compile import Compiler
-from ...base_generator import BaseGenerator
 from ..expression_builder import *
 from ..expression import *
 from antlr4 import CommonTokenStream, InputStream
@@ -13,7 +12,7 @@ from ..parser.listeners import PrismErrorListener
 
 
 class TestCompiler(TestCase):
-    class TestGenerator(BaseGenerator):
+    class TestGenerator:
         @staticmethod
         def max_x() -> int:
             return 10
