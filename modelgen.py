@@ -52,14 +52,8 @@ def load_generator(path: str, settings: Any):
 
 
 def load_compiler(name: str, template_path: str, generator: Any):
-    path = os.path.abspath(inspect.getsourcefile(lambda: 0))
-    path = os.path.dirname(path)
-    path = os.path.join(path, "core/{}/compile.py".format(name))
-    filename = os.path.basename(path)
-    module_name, ext = os.path.splitext(filename)
-    module_spec = importlib.util.spec_from_file_location(module_name, path)
-    module_obj = importlib.util.module_from_spec(module_spec)
-    module_spec.loader.exec_module(module_obj)
+    path = "core.{}.compile".format(name)
+    module_obj = importlib.import_module(path)
     generator_class = getattr(module_obj, 'Compiler')
     return generator_class(generator, template_path)
 
