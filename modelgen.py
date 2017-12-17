@@ -3,7 +3,7 @@ import os
 import argparse
 import yaml
 import importlib.util
-from core.base_generator import BaseGenerator
+from .core.base_generator import BaseGenerator
 from typing import Any
 
 
