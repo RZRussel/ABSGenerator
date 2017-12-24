@@ -303,4 +303,4 @@ class StateUpdate(BaseCode):
     def __str__(self):
         eq_token = self.token_at(PrismTemplateLexer.EQ)
 
-        return "{} {} {}".format(str(self._identifier), eq_token, str(self._expression))
+        return "({} {} {})".format(str(self._identifier), eq_token, str(self._expression))

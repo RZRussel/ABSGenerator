@@ -81,7 +81,7 @@ class TestProgram(TestCase):
         self.assertEqual(str(module_rename), result)
 
     def test_state_update(self):
-        result = "x' = z + y"
+        result = "(x' = z + y)"
 
         new_x = ExpressionBuilder(Identifier("x"))
         new_x.wrap_next()
