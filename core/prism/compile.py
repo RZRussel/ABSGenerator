@@ -225,7 +225,7 @@ class Compiler(PrismTemplateVisitor):
         elif guard_updates_node is not None:
             updates = self.visit(guard_updates_node)
         else:
-            updates = no_change_node
+            updates = [self.visit(no_change_node)]
 
         return GuardDeclaration(label, condition, updates)
 

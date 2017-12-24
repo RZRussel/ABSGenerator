@@ -44,6 +44,17 @@ class TestCompiler(TestCase):
 
         compiler = Compiler(self.TestGenerator(), "{}/resources/test_template.prism".format(path))
 
+        self._run_compiler(compiler)
+
+    def test_compile_no_changes(self):
+        path = os.path.abspath(inspect.getsourcefile(lambda: 0))
+        path = os.path.dirname(path)
+
+        compiler = Compiler(self.TestGenerator(), "{}/resources/test_no_changes_template.prism".format(path))
+
+        self._run_compiler(compiler)
+
+    def _run_compiler(self, compiler: Compiler):
         input_stream = InputStream(str(compiler.compile()))
         output_stream = StringIO()
         lexer = PrismTemplateLexer(input_stream, output=output_stream)

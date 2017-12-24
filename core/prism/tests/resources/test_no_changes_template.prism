@@ -1,0 +1,22 @@
+mdp
+
+formula max_x = @max_x@;
+formula max_y = @max_y@;
+global g_var: [1+1...2+2];
+formula max_direction = @max_direction@;
+const int N = max_x*max_x + max_y*max_y - max_dir/2.0;
+
+module Taxi
+	x: [0..max_x];
+	y: [0..max_y];
+	direction: [0..max_direction];
+
+	@move@
+
+	[] x > 0 -> true;
+
+endmodule
+
+module Taxi2 = Taxi [x1=x, y1=y, direction1=direction] endmodule
+
+init x=10 & y=8 & direction=11 endinit
